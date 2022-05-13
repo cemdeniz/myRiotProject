@@ -1,0 +1,24 @@
+{% extends 'polls/base.html' %}
+
+{% block content %}
+<h3>Hello, Summoner!</h3>
+
+<form action="{% url 'polls:home' %}" method="POST">
+    {% csrf_token %}
+    <div class="mb-3">
+    <input type="text" class="form-control" aria-describedby="emailHelp" placeholder="Summoner Name" name="sname" value="{{sname}}">
+  </div>
+    <div class="mb-3">
+    <input type="text" class="form-control" aria-describedby="emailHelp" placeholder="Region" name="region" value="{{region}}">
+  </div>
+  <div class="mb-3">
+    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Email Address" name="email" value="{{email}}">
+  </div>
+  <div class="mb-3">
+    <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password" name="passwd" value="{{passwd}}">
+  </div>
+  <button type="submit" class="btn btn-primary">Sign Up</button>
+</form>
+
+
+{% endblock %}
