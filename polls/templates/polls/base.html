@@ -1,5 +1,6 @@
 <!doctype html>
 <html lang="en">
+{% load static %}
 <head>
     <!-- Required meta tags -->
     <meta charset="utf-8">
@@ -42,3 +43,11 @@
 -->
 </body>
 </html>
+<style>
+body {
+  background-image: url('{% static "bg.png"%}');
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: 100% 100%;
+}
+</style>

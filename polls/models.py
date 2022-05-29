@@ -45,11 +45,6 @@ class Summoner(models.Model):
     lp = models.CharField(max_length=50)
     win = models.CharField(max_length=50)
     lose = models.CharField(max_length=50)
-    veteran = models.CharField(max_length=50)
-    inactive = models.CharField(max_length=50)
-    fblood = models.CharField(max_length=50)
-    hstreak = models.CharField(max_length=50)
-    lastMatch = models.CharField(max_length=50)
 
     def __str__(self):
-        return self.sname + ' / ' + self.region
+        return self.sname

@@ -19,5 +19,4 @@ class PlayerForm(forms.ModelForm):
 class SummonerForm(forms.ModelForm):
     class Meta:
         model = Summoner
-        fields = ['sname', 'region', 'level', 'tier', 'rank', 'lp', 'win', 'lose', 'veteran', 'inactive', 'fblood',
-                  'hstreak', 'lastMatch']
+        fields = ['sname', 'region', 'level', 'tier', 'rank', 'lp', 'win', 'lose']

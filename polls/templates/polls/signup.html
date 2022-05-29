@@ -1,7 +1,8 @@
 {% extends 'polls/base.html' %}
-
+{% load static %}
 {% block content %}
-<h3>Hello, Summoner!</h3>
+<body>
+<h3 style="color: white;">Hello, Summoner!</h3>
 
 <form action="{% url 'polls:home' %}" method="POST">
     {% csrf_token %}
@@ -20,5 +21,14 @@
   <button type="submit" class="btn btn-primary">Sign Up</button>
 </form>
 
-
+</body>
 {% endblock %}
+
+<style>
+body {
+  background-image: url('{% static "bg.png"%}');
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: 100% 100%;
+}
+</style>

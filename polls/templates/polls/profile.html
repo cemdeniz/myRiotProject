@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+{% load static %}
+{% for data in summoner_data %}
+<title>{{ data.sname }}'s Profile</title>
+{% endfor %}
+{% block content %}
+<form action='/'>
+    {% csrf_token %}
+    <button type="submit" class="square_btn_r">SIGN OUT</button>
+</form>
+{% for data in summoner_data %}
+<h1 style="color: white; text-align: right; padding: 9px;">{{ data.sname }} | {{ data.region }}</h1>
+{% endfor %}
+<div class="container">
+    <body>
+    {% for data in summoner_data %}
+    <div class="flex-container">
+        <div style="width: 400px;">ICON {{ data.sname}}</div>
+        <div>level:{{ data.level }}</div>
+        <div>lp:{{ data.lp }}</div>
+        <div>win:{{ data.win }}</div>
+        <div>lose:{{ data.lose }}</div>
+        <div>rank:{{ data.rank }}</div>
+        <div>tier:{{ data.tier }}</div>
+    </div>
+
+
+    {% endfor %}
+
+    {% endblock %}
+    </body>
+</div>
+</html>
+
+<style>
+
+body {
+  background-image: url('{% static "blueBG.png"%}');
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: 100% 100%;
+}
+
+.square_btn_r {
+  background-color: #03A9F4;
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: right;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 12px;
+  cursor: pointer;
+  font-weight: bold;
+  border-radius: 8px;
+  float: right;
+}
+
+.flex-container {
+  display: flex;
+  height: 200px;
+  width: 500px;
+  flex-wrap: wrap;
+  align-content: flex-start;
+  background-color: #2c2d34;
+   justify-content: center;
+}
+.flex-container-column {
+  flex-direction: column;
+}
+.flex-container-row {
+  flex-direction: row;
+}
+
+.flex-container > div {
+  background-color: #f1f1f1;
+  width: 200px;
+  margin: 5px;
+  text-align: center;
+  line-height: 25px;
+  font-size: 20px;
+}
+
+.flex-container-row > div {
+  background-color: #f1f1f1;
+  width: 200px;
+  margin: 5px;
+  text-align: center;
+  line-height: 25px;
+  font-size: 20px;
+  flex-direction: row;
+}
+
+
+
+
+</style>

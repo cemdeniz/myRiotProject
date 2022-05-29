@@ -1,5 +1,4 @@
 import gettext
-
 import form as form
 from django.http import HttpResponse, Http404, HttpResponseRedirect
 from django.template import loader
@@ -9,8 +8,8 @@ from django.views import generic
 from django.utils import timezone
 from django.views.generic import TemplateView
 from riotwatcher import LolWatcher
-from .forms import LolForm, PlayerForm
-from .models import Player
+from .forms import LolForm, PlayerForm, SummonerForm
+from .models import Player, Summoner
 from django.contrib import messages
 import requests
 
@@ -101,7 +100,8 @@ def home(request):
             return render(request, 'polls/signup.html',
                           {'sname': sname, 'region': region, 'email': email, 'passwd': passwd})
         messages.success(request, "Player saved Successfully!")
-        return redirect('LolView')
+        #return render(request, '/', {})
+        return redirect('/')
     else:
         return render(request, 'polls/signup.html', {})
 
@@ -121,14 +121,14 @@ class LolView(TemplateView):
             name = form.cleaned_data['name']
             region = form.cleaned_data['region']
             form = LolForm
-            lol_watcher = LolWatcher('RGAPI-5ae835e4-48e2-40dd-b393-ef6b133f9f81')
+            lol_watcher = LolWatcher('RGAPI-d850d152-7892-4a03-b66e-eeefb9260026')
 
             me = lol_watcher.summoner.by_name(region, name)
             my_ranked_stats = lol_watcher.league.by_summoner(region, me['id'])
             my_matches = lol_watcher.match.matchlist_by_puuid('europe', me['puuid'])
-            #print("me", me)
+            # print("me", me)
             print("my_ranked_stats: ", my_ranked_stats)
-            wrPerc = int(my_ranked_stats[1]['wins'] / (my_ranked_stats[1]['wins'] + my_ranked_stats[1]['losses']) * 100)
+            wrPerc = int(my_ranked_stats[0]['wins'] / (my_ranked_stats[0]['wins'] + my_ranked_stats[0]['losses']) * 100)
             icon = lol_watcher.data_dragon.profile_icons(version="12.7.1")
 
             # print("my matches: ", my_matches)
@@ -198,7 +198,7 @@ class LolView(TemplateView):
             gameSec = int(gameDuration % 60)
             gameMode = lastMatchDetail['info']['gameMode']
 
-            #print("test: ", lastMatchDetail['info']['participants'][0])
+            print("test: ", lastMatchDetail['info']['participants'][0]['challenges']['kda'])
 
         args = {'form': form,
                 'sumName': me['name'],
@@ -209,12 +209,12 @@ class LolView(TemplateView):
                 'inactive': my_ranked_stats[0]['inactive'],
                 'freshBlood': my_ranked_stats[0]['freshBlood'],
                 'hotStreak': my_ranked_stats[0]['hotStreak'],
-                'queueType': my_ranked_stats[1]['queueType'],
-                'tier': my_ranked_stats[1]['tier'],
-                'rank': my_ranked_stats[1]['rank'],
-                'leaguePoints': my_ranked_stats[1]['leaguePoints'],
-                'winNumber': my_ranked_stats[1]['wins'],
-                'loseNumber': my_ranked_stats[1]['losses'],
+                'queueType': my_ranked_stats[0]['queueType'],
+                'tier': my_ranked_stats[0]['tier'],
+                'rank': my_ranked_stats[0]['rank'],
+                'leaguePoints': my_ranked_stats[0]['leaguePoints'],
+                'winNumber': my_ranked_stats[0]['wins'],
+                'loseNumber': my_ranked_stats[0]['losses'],
                 'wrPerc': wrPerc,
                 'myLastMatches': myLastMatches,
                 'gameId': lastMatchDetail['info']['gameId'],
@@ -240,3 +240,9 @@ class LolView(TemplateView):
                 'lastWinLose': lastMatchDetail['info']['participants'][0]['win'],
                 'my_icon_id': 'https://static.senpai.gg/lol/img/profileicon/{}.png'.format(me['profileIconId'])}
         return render(request, 'polls/lol.html', args)
+
+
+def profile(request):
+    summoner_data = Summoner.objects.all()
+
+    return render(request, 'polls/profile.html', {'summoner_data': summoner_data})
