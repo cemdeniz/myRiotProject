@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html>
+{% load static %}
+{% for i in summonerInfo %}
+<title>{{ i.sname }}'s Match Detail</title>
+{% endfor %}
+<form action='/'>
+    {% csrf_token %}
+    <button type="submit" class="square_btn_l">EXIT</button>
+</form>
+{% for i in summonerInfo|slice:"1" %}
+<h1 style="color: white; text-align: right; padding: 9px;">{{ i.sname }}</h1>
+{% endfor %}
+<div class="container">
+    <body>
+    <h1 style="color:white; text-align: center;">Match Details</h1>
+
+    <div class="flex-container-row">
+        <div><h3 style="text-align: center; color: #21C0F3">First Team</h3></div>
+        <div><h3 style="text-align: center; color: #21C0F3">Second Team</h3></div>
+    </div>
+
+    <div class="flex-container-row">
+        <div class="flex-container-row" style="justify-content: center; text-align: center;">
+            <div class="flex-container-column">
+                <div style="margin: 15px; justify-content: center; text-align: center;"><b>Players</b></div>
+                {% for x in allPlayers|slice:"5" %}
+                {% for j in summonerInfo|slice:"1" %}
+                <div style="margin: 15px; justify-content: center; text-align: center;">
+                    <form>
+                        {% csrf_token %}
+                        <a href="{% url 'polls:profile' x.Name j.region %}">{{ x.Name }}</a>
+                    </form>
+                </div>
+                {% endfor %}
+                {% endfor %}
+            </div>
+            <div class="flex-container-column">
+                <div style="margin: 15px; justify-content: center; text-align: center;"><b>Champions</b></div>
+                {% for x in allPlayers|slice:"5" %}
+                <div style="margin: 15px; justify-content: center; text-align: center;">{{ x.Champ }}</div>
+                {% endfor %}
+
+            </div>
+            <div class="flex-container-column">
+                <div style="margin: 15px; justify-content: center; text-align: center;"><b>KDA</b></div>
+                {% for x in allPlayers|slice:"5" %}
+                <div style="margin: 15px; justify-content: center; text-align: center;">{{ x.KDA }}</div>
+                {% endfor %}
+            </div>
+            <div class="flex-container-column">
+                <div style="margin: 15px; justify-content: center; text-align: center;"><b>Levels</b></div>
+                {% for x in allPlayers|slice:"5" %}
+                <div style="margin: 15px; justify-content: center; text-align: center;">{{ x.Level }}</div>
+                {% endfor %}
+            </div>
+            <div class="flex-container-column">
+                <div style="margin: 15px; justify-content: center; text-align: center;"><b>Total Gold</b></div>
+                {% for x in allPlayers|slice:"5" %}
+                <div style="margin: 15px; justify-content: center; text-align: center;">{{ x.TotalGold }}</div>
+                {% endfor %}
+            </div>
+            <div class="flex-container-column">
+                <div style="margin: 15px; justify-content: center; text-align: center;"><b>Solo Kills</b></div>
+                {% for x in allPlayers|slice:"5" %}
+                <div style="margin: 15px; justify-content: center; text-align: center;">{{ x.SoloKill }}</div>
+                {% endfor %}
+            </div>
+            <div class="flex-container-column">
+                <div style="margin: 15px; justify-content: center; text-align: center;"><b>CS</b></div>
+                {% for x in allPlayers|slice:"5" %}
+                <div style="margin: 15px; justify-content: center; text-align: center;">{{ x.CS }}</div>
+                {% endfor %}
+            </div>
+        </div>
+        <div class="flex-container-row">
+            <div class="flex-container-column">
+                <div style="margin: 15px; justify-content: center; text-align: center;"><b>Players</b></div>
+                {% for x in allPlayers|slice:"5:10" %}
+                {% for j in summonerInfo|slice:"1" %}
+                <div style="margin: 15px; justify-content: center; text-align: center;">
+                    <form>
+                        {% csrf_token %}
+                        <a href="{% url 'polls:profile' x.Name j.region %}">{{ x.Name }}</a>
+                    </form>
+                </div>
+                {% endfor %}
+                {% endfor %}
+
+            </div>
+            <div class="flex-container-column">
+                <div style="margin: 15px; justify-content: center; text-align: center;"><b>Champions</b></div>
+                {% for x in allPlayers|slice:"5:10" %}
+                <div style="margin: 15px; justify-content: center; text-align: center;">{{ x.Champ }}</div>
+                {% endfor %}
+
+            </div>
+            <div class="flex-container-column">
+                <div style="margin: 15px; justify-content: center; text-align: center;"><b>KDA</b></div>
+                {% for x in allPlayers|slice:"5:10" %}
+                <div style="margin: 15px; justify-content: center; text-align: center;">{{ x.KDA }}</div>
+                {% endfor %}
+
+            </div>
+            <div class="flex-container-column">
+                <div style="margin: 15px; justify-content: center; text-align: center;"><b>Levels</b></div>
+                {% for x in allPlayers|slice:"5:10" %}
+                <div style="margin: 15px; justify-content: center; text-align: center;">{{ x.Level }}</div>
+                {% endfor %}
+
+            </div>
+            <div class="flex-container-column">
+                <div style="margin: 15px; justify-content: center; text-align: center;"><b>Total Golds</b></div>
+                {% for x in allPlayers|slice:"5:10" %}
+                <div style="margin: 15px; justify-content: center; text-align: center;">{{ x.TotalGold }}</div>
+                {% endfor %}
+
+            </div>
+            <div class="flex-container-column">
+                <div style="margin: 15px; justify-content: center; text-align: center;"><b>Solo Kills</b></div>
+                {% for x in allPlayers|slice:"5:10" %}
+                <div style="margin: 15px; justify-content: center; text-align: center;">{{ x.SoloKill }}</div>
+                {% endfor %}
+
+            </div>
+            <div class="flex-container-column">
+                <div style="margin: 15px; justify-content: center; text-align: center;"><b>CS</b></div>
+                {% for x in allPlayers|slice:"5:10" %}
+                <div style="margin: 15px; justify-content: center; text-align: center;">{{ x.CS }}</div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+
+
+    </body>
+</div>
+</html>
+
+<style>
+
+body {
+  background-image: url('{% static "blueBG.png"%}');
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: 100% 100%;
+
+}
+.square_btn_r {
+  background-color: #03A9F4;
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: right;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 12px;
+  cursor: pointer;
+  font-weight: bold;
+  border-radius: 8px;
+  float: right;
+}
+.square_btn_l {
+  background-color: #6360DC;
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: right;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+  font-weight: bold;
+  border-radius: 8px;
+  float: left;
+}
+
+.flex-container-row {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  color: white;
+}
+.flex-container-column {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  color: white;
+}
+.flex-container-th{
+padding: 15px;
+}
+.flex-container-td{
+padding: 15px;
+}
+.div {
+  margin: 10px;
+  padding: 10px;
+  font-size: 20px;
+}
+
+.center{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+}
+
+
+
+
+
+
+</style>

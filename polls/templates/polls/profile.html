@@ -1,36 +1,28 @@
 <!DOCTYPE html>
 <html>
 {% load static %}
-{% for data in summoner_data %}
-<title>{{ data.sname }}'s Profile</title>
-{% endfor %}
-{% block content %}
-<form action='/'>
-    {% csrf_token %}
-    <button type="submit" class="square_btn_r">SIGN OUT</button>
-</form>
-{% for data in summoner_data %}
-<h1 style="color: white; text-align: right; padding: 9px;">{{ data.sname }} | {{ data.region }}</h1>
-{% endfor %}
+<title>{{ myName }}'s Profile</title>
+
 <div class="container">
     <body>
-    {% for data in summoner_data %}
-    <div class="flex-container">
-        <div style="width: 400px;">ICON {{ data.sname}}</div>
-        <div>level:{{ data.level }}</div>
-        <div>lp:{{ data.lp }}</div>
-        <div>win:{{ data.win }}</div>
-        <div>lose:{{ data.lose }}</div>
-        <div>rank:{{ data.rank }}</div>
-        <div>tier:{{ data.tier }}</div>
+    <div class="center">
+        <form action="">
+            {% csrf_token %}
+            <h3 style="color:white;">{{ myName }}'s Match History</h3>
+
+            <li style="color:white;"><a href="{% url 'polls:matchdetail' myName myLastMatches1 %}">{{ me1 }} vs {{ enemy1 }}</a></li>
+            <li style="color:white;"><a href="{% url 'polls:matchdetail' myName myLastMatches2 %}">{{ me2 }} vs {{ enemy2 }}</a></li>
+            <li style="color:white;"><a href="{% url 'polls:matchdetail' myName myLastMatches3 %}">{{ me3 }} vs {{ enemy3 }}</a></li>
+            <li style="color:white;"><a href="{% url 'polls:matchdetail' myName myLastMatches4 %}">{{ me4 }} vs {{ enemy4 }}</a></li>
+            <li style="color:white;"><a href="{% url 'polls:matchdetail' myName myLastMatches5 %}">{{ me5 }} vs {{ enemy5 }}</a></li>
+
+        </form>
     </div>
 
-
-    {% endfor %}
-
-    {% endblock %}
     </body>
 </div>
+
+
 </html>
 
 <style>
@@ -40,8 +32,8 @@ body {
   background-repeat: no-repeat;
   background-attachment: fixed;
   background-size: 100% 100%;
-}
 
+}
 .square_btn_r {
   background-color: #03A9F4;
   border: none;
@@ -57,41 +49,62 @@ body {
   border-radius: 8px;
   float: right;
 }
+.square_btn_l {
+  background-color: #6360DC;
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: right;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+  font-weight: bold;
+  border-radius: 8px;
+  float: left;
+}
 
-.flex-container {
+.flex-container-row {
   display: flex;
-  height: 200px;
-  width: 500px;
-  flex-wrap: wrap;
-  align-content: flex-start;
-  background-color: #2c2d34;
-   justify-content: center;
+  flex-direction: row;
+  justify-content: space-around;
+  color: white;
 }
 .flex-container-column {
+  display: flex;
   flex-direction: column;
+  justify-content: space-around;
+  color: white;
 }
-.flex-container-row {
-  flex-direction: row;
+.flex-container-th{
+padding: 15px;
 }
-
-.flex-container > div {
-  background-color: #f1f1f1;
-  width: 200px;
-  margin: 5px;
-  text-align: center;
-  line-height: 25px;
+.flex-container-td{
+padding: 15px;
+}
+.div {
+  margin: 10px;
+  padding: 10px;
   font-size: 20px;
 }
 
-.flex-container-row > div {
-  background-color: #f1f1f1;
-  width: 200px;
-  margin: 5px;
-  text-align: center;
-  line-height: 25px;
-  font-size: 20px;
-  flex-direction: row;
+.center{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
+
+.left{
+  display: flex;
+  flex-direction: column;
+  justify-content: left;
+  text-align: center;
+}
+
+
+
+
 
 
 

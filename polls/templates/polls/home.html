@@ -13,22 +13,6 @@
 
 </div>
 
-    <form action="/signup" method="post">
-        {% csrf_token %}
-        <button type="submit" class="square_btn">SIGN UP</button>
-        <button type="submit" class="square_btn_r">SIGN IN</button>
-    </form>
-    <div class="dropdown">
-        <button class="dropbtn">Signed Up Players</button>
-        <div class="dropdown-content">
-            {% for item in all_players %}
-            <p><a href="#" style="color: white;">{{ item }}</a></p>
-            {% endfor %}
-        </div>
-    </div>
-
-
-
 <style>
 .square_btn_r {
   background-color: #6360DC;

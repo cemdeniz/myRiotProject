@@ -2,13 +2,16 @@
 <html>
 {% load static %}
 <title>{{ sumName }}'s Profile</title>
+<form action='/'>
+    {% csrf_token %}
+    <button type="submit" class="square_btn_l">EXIT</button>
+</form>
 <div class="container">
     <div class="center">
-        <h1 style="color:white;">
+        <h1 style="color:white">
             <img src="{{ my_icon_id }}" alt="" width="42" height="42"
                  style="vertical-align:middle;margin:0px 15px">{{ sumName }}'s Profile</h1>
     </div>
-
 
     <head>
         <style>
@@ -42,6 +45,36 @@ padding: 15px;
   justify-content: center;
   text-align: center;
 }
+.square_btn_r {
+  background-color: #6360DC;
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: right;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+  font-weight: bold;
+  border-radius: 8px;
+  float: right;
+}
+.square_btn_l {
+  background-color: #6360DC;
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: right;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+  font-weight: bold;
+  border-radius: 8px;
+  float: left;
+}
 
 .button {
   background-color: #4CAF50;
@@ -67,12 +100,15 @@ body {
   background-size: 100% 100%;
 }
 
+
+
         </style>
     </head>
     <body>
 
+
     <div class="flex-container-row">
-        <div>
+        <div style="border: 1px solid white;">
             <div class="center"><h2 style="color: #21C0F3;">Information</h2></div>
             <div class="flex-container-th"><b>{{ sumName }}'s Level: </b> {{ sumLevel }}</div>
             <div class="flex-container-th"><b>Veteran: </b> {{ veteran }}</div>
@@ -80,116 +116,109 @@ body {
             <div class="flex-container-th"><b>Fresh Blood: </b> {{ freshBlood }}</div>
             <div class="flex-container-th"><b>Hot Streak: </b> {{ hotStreak }}</div>
         </div>
-        <div>
+        <div style="border: 1px solid white;">
             <div class="center"><h2 style="color: #21C0F3;">Ranked Stats</h2></div>
             <div class="flex-container-th"><b>Queue Type: </b> {{ veteran }}</div>
-            <div class="flex-container-th"><b>My Rank: </b> {{ tier }} {{ rank }}</div>
-            <div class="flex-container-th"><b>My LP: </b> {{ leaguePoints }}</div>
+            <div class="flex-container-th"><b>Rank: </b> {{ tier }} {{ rank }}</div>
+            <div class="flex-container-th"><b>LP: </b> {{ leaguePoints }}</div>
             <div class="flex-container-th"><b>Win/Lose: </b> {{ winNumber }}/{{ loseNumber }}</div>
             <div class="flex-container-th"><b>Win Rate: </b> %{{ wrPerc }}</div>
-
         </div>
-        <div>
-            <div class="center"><h2 style="color: #21C0F3; ">Last Match</h2></div>
-            <div class="flex-container-th"><b>Match Mode: </b> {{ gameMode }}</div>
-            <div class="flex-container-th"><b>Game Duration: </b>{{ gameMin }}m {{ gameSec }}s</div>
-            <div class="flex-container-th"><b>Role: </b> {{ myRole }}</div>
-            <div class="flex-container-th"><b>Champion: </b> {{ lastChampion }}</div>
-            <div class="flex-container-th"><b>Win or Lose: </b>
-                {% if lastWinLose == false %}
-                <b style="color:red;">Lose:(</b>
+    </div>
+
+    <div class="flex-container-row" style="border: 1px solid white;">
+        <div class="flex-container-column" style="justify-content: space-evenly;">
+            {% for x in myLastMatches %}
+            <form>
+            {% csrf_token %}
+                <div style="margin: 15px;" >
+                    <a href="{% url 'polls:matchdetail' sumName x %}">Go Detail</a>
+                </div>
+            </form>
+            {% endfor %}
+        </div>
+        <div class="flex-container-column" style="justify-content: space-evenly">
+            {% for x in mapDescs %}
+                <div style="margin: 15px;">{{ x }}</div>
+            {% endfor %}
+        </div>
+        <div class="flex-container-column" style="justify-content: space-evenly">
+            {% for x in mapNames %}
+            <div style="margin: 15px;">{{ x }}</div>
+            {% endfor %}
+        </div>
+        <div class="flex-container-column" style="justify-content: space-evenly">
+            {% for x in myItems1 %}
+                <img src="{{ x }}" onerror="this.onerror=null; this.src='{% static 'john-travolta.gif'%}';" alt="" width="42" height="42"
+                 style="vertical-align:middle;margin:0px -15px;border-style: outset;">
+            {% endfor %}
+        </div>
+        <div class="flex-container-column" style="justify-content: space-evenly">
+            {% for x in myItems2 %}
+                <img src="{{ x }}" onerror="this.onerror=null; this.src='{% static 'john-travolta.gif'%}';" alt="" width="42" height="42"
+                 style="vertical-align:middle;margin:0px -55px;border-style: outset;">
+            {% endfor %}
+        </div>
+        <div class="flex-container-column" style="justify-content: space-evenly">
+            {% for x in myItems3 %}
+                <img src="{{ x }}" onerror="this.onerror=null; this.src='{% static 'john-travolta.gif'%}';" alt="" width="42" height="42"
+                 style="vertical-align:middle;margin:0px -75px;border-style: outset;">
+            {% endfor %}
+        </div>
+        <div class="flex-container-column" style="justify-content: space-evenly">
+            {% for x in myItems4 %}
+                <img src="{{ x }}" onerror="this.onerror=null; this.src='{% static 'john-travolta.gif'%}';" alt="" width="42" height="42"
+                 style="vertical-align:middle;margin:0px -95px;border-style: outset;">
+            {% endfor %}
+        </div>
+        <div class="flex-container-column" style="justify-content: space-evenly">
+            {% for x in myItems5 %}
+                <img src="{{ x }}" onerror="this.onerror=null; this.src='{% static 'john-travolta.gif'%}';" alt="" width="42" height="42"
+                 style="vertical-align:middle;margin:0px -115px;border-style: outset;">
+            {% endfor %}
+        </div>
+        <div class="flex-container-column" style="justify-content: space-evenly">
+            {% for x in myItems6 %}
+                <img src="{{ x }}" onerror="this.onerror=null; this.src='{% static 'john-travolta.gif'%}';" alt="" width="42" height="42"
+                 style="vertical-align:middle;margin:0px -135px;border-style: outset;">
+            {% endfor %}
+        </div>
+        <div class="flex-container-column " style="justify-content: space-evenly">
+            {% for x in lastChampionsImgs %}
+                 <img src="{{ x }}" alt="" width="55" height="55"
+                 style="vertical-align:middle;margin:0px -60px">
+            {% endfor %}
+        </div>
+        <div class="flex-container-column" style="justify-content: space-evenly">
+            {% for x in runeUrls %}
+                <img src="{{ x }}" alt="" width="55" height="55"
+                 style="vertical-align:middle;margin:0px -105px">
+            {% endfor %}
+        </div>
+        <div class="flex-container-column">
+            {% for x in altRuneUrls %}
+                <img src="{{ x }}" alt="" width="20" height="20"
+                 style="margin:25px -160px">
+            {% endfor %}
+        </div>
+        <div class="flex-container-column">
+            {% for x in gameDurations %}
+                <div style="margin:0px -95px;">{{ x }}</div>
+            {% endfor %}
+        </div>
+        <div class="flex-container-column" style="justify-content: space-evenly">
+            {% for x in winLoses %}
+             {% if x == False %}
+                <img src="{% static 'defeat.png' %}" alt="" width="75" height="75"
+                 style="vertical-align:middle;margin:0px -55px">
                 {% else %}
-                <b style="color:green;">Win:)</b>
+                <img src="{% static 'victory.png' %}" alt="" width="75" height="75"
+                 style="vertical-align:middle;margin:0px -55px">
                 {% endif %}
-            </div>
+            {% endfor %}
         </div>
-    </div>
 
-    <h1 style="color:white; text-align: center;">Last Match Details</h1>
-
-    <div class="flex-container-row">
-        <div><h3 style="text-align: center; color: #21C0F3">First Team</h3></div>
-        <div><h3 style="text-align: center; color: #21C0F3">Second Team</h3></div>
     </div>
-    <div class="flex-container-row">
-        <div class="flex-container-row" style="justify-content: center; text-align: center;">
-            <div class="flex-container-column">
-                <div style="margin: 15px; justify-content: center; text-align: center;"><b>Players</b></div>
-                {% for x in first_team %}
-                <div style="margin: 15px; justify-content: center; text-align: center;">{{ x }}</div>
-                {% endfor %}
-            </div>
-            <div class="flex-container-column">
-                <div style="margin: 15px; justify-content: center; text-align: center;"><b>Champions</b></div>
-                {% for x in first_team_champName %}
-                <div style="margin: 15px; justify-content: center; text-align: center;">{{ x }}</div>
-                {% endfor %}
-            </div>
-            <div class="flex-container-column">
-                <div style="margin: 15px; justify-content: center; text-align: center;"><b>KDA</b></div>
-                {% for x in first_team_kda %}
-                <div style="margin: 15px; justify-content: center; text-align: center;">{{ x }}</div>
-                {% endfor %}
-            </div>
-            <div class="flex-container-column">
-                <div style="margin: 15px; justify-content: center; text-align: center;"><b>Levels</b></div>
-                {% for x in first_team_level %}
-                <div style="margin: 15px; justify-content: center; text-align: center;">{{ x }}</div>
-                {% endfor %}
-            </div>
-            <div class="flex-container-column">
-                <div style="margin: 15px; justify-content: center; text-align: center;"><b>Total Gold</b></div>
-                {% for x in first_team_gold %}
-                <div style="margin: 15px; justify-content: center; text-align: center;">{{ x }}</div>
-                {% endfor %}
-            </div>
-            <div class="flex-container-column">
-                <div style="margin: 15px; justify-content: center; text-align: center;"><b>Solo Kills</b></div>
-                {% for x in first_team_soloKills %}
-                <div style="margin: 15px; justify-content: center; text-align: center;">{{ x }}</div>
-                {% endfor %}
-            </div>
-        </div>
-        <div class="flex-container-row">
-            <div class="flex-container-column">
-                <div style="margin: 15px; justify-content: center; text-align: center;"><b>Players</b></div>
-                {% for x in second_team %}
-                <div style="margin: 15px; justify-content: center; text-align: center;">{{ x }}</div>
-                {% endfor %}
-            </div>
-            <div class="flex-container-column">
-                <div style="margin: 15px; justify-content: center; text-align: center;"><b>Champions</b></div>
-                {% for x in second_team_champName %}
-                <div style="margin: 15px; justify-content: center; text-align: center;">{{ x }}</div>
-                {% endfor %}
-            </div>
-            <div class="flex-container-column">
-                <div style="margin: 15px; justify-content: center; text-align: center;"><b>KDA</b></div>
-                {% for x in second_team_kda %}
-                <div style="margin: 15px; justify-content: center; text-align: center;">{{ x }}</div>
-                {% endfor %}
-            </div>
-            <div class="flex-container-column">
-                <div style="margin: 15px; justify-content: center; text-align: center;"><b>Levels</b></div>
-                {% for x in second_team_level %}
-                <div style="margin: 15px; justify-content: center; text-align: center;">{{ x }}</div>
-                {% endfor %}
-            </div>
-            <div class="flex-container-column">
-                <div style="margin: 15px; justify-content: center; text-align: center;"><b>Total Golds</b></div>
-                {% for x in second_team_gold %}
-                <div style="margin: 15px; justify-content: center; text-align: center;">{{ x }}</div>
-                {% endfor %}
-            </div>
-            <div class="flex-container-column">
-                <div style="margin: 15px; justify-content: center; text-align: center;"><b>Solo Kills</b></div>
-                {% for x in second_team_soloKills %}
-                <div style="margin: 15px; justify-content: center; text-align: center;">{{ x }}</div>
-                {% endfor %}
-            </div>
-        </div>
-    </div>
-
     </body>
 </div>
 </html>
