@@ -31,7 +31,7 @@ class LolView(TemplateView):
             region = form.cleaned_data['region']
             form = LolForm
 
-        lol_watcher = LolWatcher('RGAPI-0c185768-a0f6-41d8-a3f7-3d89ca3e6451')
+        lol_watcher = LolWatcher('RGAPI-5bfdde43-f391-4d01-8931-74ef63a025f4')
         myLastMatches = []
         first_team = []
         second_team = []
@@ -2145,14 +2145,14 @@ class LolView(TemplateView):
                 if str(runes[x])[:2] == str(runeJson[j]["id"])[:2]:
                     for z in range(4):
                         if runes[x] == runeJson[j]["slots"][0]["runes"][z]["id"]:
-                            runeUrls.append('https://static.senpai.gg/lol/img/{}'.format(runeJson[j]["slots"][0]["runes"][z]["icon"]))
+                            runeUrls.append('https://ddragon.canisback.com/img/{}'.format(runeJson[j]["slots"][0]["runes"][z]["icon"]))
 
         for x in range(5):
             for j in range(5):
                 if str(altRunes[x])[:2] == str(runeJson[j]["id"])[:2]:
-                    altRuneUrls.append('https://static.senpai.gg/lol/img/{}'.format(runeJson[j]["icon"]))
+                    altRuneUrls.append('https://ddragon.canisback.com/img/{}'.format(runeJson[j]["icon"]))
 
-        itemURL = 'https://static.senpai.gg/lol/img/item/{}.png'
+        itemURL = 'http://ddragon.leagueoflegends.com/cdn/12.12.1/img/item/{}.png'
         for x in range(5):
             myItems1.append(itemURL.format(items1[x]))
             myItems2.append(itemURL.format(items2[x]))
@@ -2223,7 +2223,8 @@ class LolView(TemplateView):
                     playerIndex = q
                     lastChampions.append(tempDetail['info']['participants'][playerIndex]['championName'])
                     lastChampionsImgs.append(
-                        'https://static.senpai.gg/lol/img/champion/{}.png'.format(lastChampions[x]))
+                        'http://ddragon.leagueoflegends.com/cdn/12.12.1/img/champion/{}.png'.format(lastChampions[x]))
+
                     if playerIndex < 5:
                         lastOpponents.append(
                             tempDetail['info']['participants'][playerIndex + 5]['championName'])
@@ -2325,7 +2326,7 @@ class LolView(TemplateView):
                 'myRole': lastMatchDetail['info']['participants'][lastMatchIndex]['teamPosition'],
                 'lastChampion': lastMatchDetail['info']['participants'][lastMatchIndex]['championName'],
                 'lastWinLose': lastMatchDetail['info']['participants'][lastMatchIndex]['win'],
-                'my_icon_id': 'https://static.senpai.gg/lol/img/profileicon/{}.png'.format(me['profileIconId']),
+                'my_icon_id': 'https://ddragon.canisback.com/12.12.1/img/profileicon/{}.png'.format(me['profileIconId']),
                 'lastChampions': lastChampions,
                 'gameTypes': gameTypes,
                 'mapNames': mapNames,
@@ -2357,7 +2358,7 @@ def matchdetail(request, myName, matchId):
 
 
 def profile(request, sumName, region):
-    lol_watcher = LolWatcher('RGAPI-0c185768-a0f6-41d8-a3f7-3d89ca3e6451')
+    lol_watcher = LolWatcher('RGAPI-5bfdde43-f391-4d01-8931-74ef63a025f4')
     myLastMatches = []
     first_team = []
     second_team = []
@@ -4472,14 +4473,15 @@ def profile(request, sumName, region):
                 for z in range(4):
                     if runes[x] == runeJson[j]["slots"][0]["runes"][z]["id"]:
                         runeUrls.append(
-                            'https://static.senpai.gg/lol/img/{}'.format(runeJson[j]["slots"][0]["runes"][z]["icon"]))
+                            'https://ddragon.canisback.com/img/{}'.format(runeJson[j]["slots"][0]["runes"][z]["icon"]))
 
     for x in range(5):
         for j in range(5):
             if str(altRunes[x])[:2] == str(runeJson[j]["id"])[:2]:
-                altRuneUrls.append('https://static.senpai.gg/lol/img/{}'.format(runeJson[j]["icon"]))
+                altRuneUrls.append('https://ddragon.canisback.com/img/{}'.format(runeJson[j]["icon"]))
 
-    itemURL = 'https://static.senpai.gg/lol/img/item/{}.png'
+    itemURL = 'http://ddragon.leagueoflegends.com/cdn/12.12.1/img/item/{}.png'
+
     for x in range(5):
         myItems1.append(itemURL.format(items1[x]))
         myItems2.append(itemURL.format(items2[x]))
@@ -4550,7 +4552,7 @@ def profile(request, sumName, region):
                 playerIndex = q
                 lastChampions.append(tempDetail['info']['participants'][playerIndex]['championName'])
                 lastChampionsImgs.append(
-                    'https://static.senpai.gg/lol/img/champion/{}.png'.format(lastChampions[x]))
+                    'http://ddragon.leagueoflegends.com/cdn/12.12.1/img/champion/{}.png'.format(lastChampions[x]))
                 if playerIndex < 5:
                     lastOpponents.append(
                         tempDetail['info']['participants'][playerIndex + 5]['championName'])
@@ -4652,7 +4654,7 @@ def profile(request, sumName, region):
             'myRole': lastMatchDetail['info']['participants'][lastMatchIndex]['teamPosition'],
             'lastChampion': lastMatchDetail['info']['participants'][lastMatchIndex]['championName'],
             'lastWinLose': lastMatchDetail['info']['participants'][lastMatchIndex]['win'],
-            'my_icon_id': 'https://static.senpai.gg/lol/img/profileicon/{}.png'.format(me['profileIconId']),
+            'my_icon_id': 'https://ddragon.canisback.com/12.12.1/img/profileicon/{}.png'.format(me['profileIconId']),
             'lastChampions': lastChampions,
             'gameTypes': gameTypes,
             'mapNames': mapNames,
