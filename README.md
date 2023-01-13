@@ -1,4 +1,4 @@
-# myRiotProject_Frontend&Backend
+# League of Legends Frontend&Backend Project
 
 League of Legends Customized User Profile that pulls data from Riot Games API
 -----------------
