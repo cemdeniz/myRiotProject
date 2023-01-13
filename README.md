@@ -1,6 +1,6 @@
-# myRiotProject
+# myRiotProject_Frontend&Backend
 
-League of Legends Customized User Profile
+League of Legends Customized User Profile that pulls data from Riot Games API
 -----------------
 
 Search your Nickname and Region.
